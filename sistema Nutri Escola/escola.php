@@ -148,7 +148,7 @@ if(!empty($_GET['idAlt'])){
                 ?>
 
                 <tr>
-
+                    <!--ola mundo-->
                   <td> <?php echo $coluna['id'] ?> </td>
                   <td> <?php echo $coluna['nome'] ?> </td>
                   <td> <?php echo $coluna['telefone'] ?> </td>
@@ -160,7 +160,7 @@ if(!empty($_GET['idAlt'])){
 
                     <a href="https://wa.me/+55<?php echo $whats?>" target="_blank"> 
                       <i class="fa-brands fa-whatsapp editar"></i> </a>
-                      
+
                     <a href="escola.php?idAlt=<?= $coluna['id'] ?>" title="Editar"> <i class="fa-solid fa-pen-to-square editar"></i> </a>
                     <a href="<?php echo './escola/excluir.php?id='.$coluna['id']; ?>" title="Excluir"> <i class="fa-solid fa-trash excluir"></i></a>
                   </td>
