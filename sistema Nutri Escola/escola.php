@@ -133,6 +133,7 @@ if(!empty($_GET['idAlt'])){
                   <th scope="col" class="col-1">cód</th>
                   <th scope="col"> Nome </th>
                   <th scope="col"> Telefone </th>
+                  <th scope="col"> Cidade </th>
                   <th scope="col" class="col-2"> Opções </th>
                 </tr>
               </thead>
@@ -152,6 +153,13 @@ if(!empty($_GET['idAlt'])){
                   <td> <?php echo $coluna['id'] ?> </td>
                   <td> <?php echo $coluna['nome'] ?> </td>
                   <td> <?php echo $coluna['telefone'] ?> </td>
+                  <td> 
+                    <?php 
+                    $sql2 = "SELECT * FROM cidade WHERE id='".$coluna['id']."' ";
+                    $dados = mysqli_query($conexao, $sql2);
+                    $buscaCidade = mysqli_fetch_assoc($dados);
+                    echo $buscaCidade['nome'] ?> 
+                </td>
                   <td>
                     <?php
                     $texto = $coluna['celular'];

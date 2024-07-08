@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(página atual)</span></a>
+          <a class="nav-link" href="./sistema">Home <span class="sr-only">(página atual)</span></a>
         </li>
 
 
@@ -30,7 +30,7 @@
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit"> <i class="fa-solid fa-search"></i> </button>
         
       </form>
     </div>

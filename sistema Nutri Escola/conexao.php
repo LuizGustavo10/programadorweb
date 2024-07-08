@@ -1,8 +1,19 @@
+<!-- <php
+$endereco = "sql204.infinityfree.com"; //localhost
+$nome = "if0_36845851_projetoescola";   //projetoescola
+$usuario = "if0_36845851";         //root
+$senha = "luizsenac123";               //vazio
+
+$conexao = mysqli_connect($endereco, $usuario, $senha, $nome);
+
+?> -->
+
+
 <?php
-$endereco = "localhost";
-$nome = "projetoescola";
-$usuario = "root";
-$senha = "";
+$endereco = "localhost"; //localhost
+$nome = "projetoescola";   //projetoescola
+$usuario = "root";         //root
+$senha = "";               //vazio
 
 $conexao = mysqli_connect($endereco, $usuario, $senha, $nome);
 
