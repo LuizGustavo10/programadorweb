@@ -4,19 +4,22 @@ include ('conexao.php');
 include ('validacao.php');
 
 //destino do formulário vai para o inserir
-$destino = './escola/inserir.php';
+$destino = './cardapio/inserir.php';
 
 //se existir algum idAlt
 if(!empty($_GET['idAlt'])){
   $id= $_GET['idAlt'];
-  $sql = "SELECT * FROM escola WHERE id='$id' ";
+  $sql = "SELECT * FROM cardapio WHERE id='$id' ";
   $dados = mysqli_query($conexao, $sql);
   $dadosAlteracao = mysqli_fetch_assoc($dados);
 
   //destino do formulário vai para o alterar.php
-  $destino = './escola/alterar.php';
+  $destino = './cardapio/alterar.php';
 }
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -33,11 +36,15 @@ if(!empty($_GET['idAlt'])){
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
 
+
+
 </head>
 
 <body>
 
   <?php include './modulosMenu/menuSuperior.php' ?>
+  
+  
   
   <div class="container-fluid">
     
@@ -54,76 +61,52 @@ if(!empty($_GET['idAlt'])){
 
             <form action="<?=$destino?>" method="POST">
            
-              <h3>Cadastro de escola</h3>
+
+              <h3>Cadastro de cardapio</h3>
               <hr>
               <div class="form-group">
                 <label> Código </label>
                 <input value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['id'] : '' ?>" type="text" name="id" class="form-control" id="codigo" placeholder="Código">
               </div>
 
-              <div class="form-group">
-                <label> Nome </label>
-                <input required value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['nome'] : '' ?>" type="text" name="nome" class="form-control" id="nome" placeholder="Nome">
-              </div>
-
-              <div class="form-group">
-                <label> Endereço </label>
-                <input required value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['endereco'] : '' ?>" 
-                type="text" name="endereco" class="form-control" id="endereco" placeholder="endereço">
-              </div>
-
-              <div class="form-group">
-                <label>Bairro</label>
-                <input type="text" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['bairro'] : '' ?>" 
-                                    name="bairro" class="form-control bairro" id="bairro" placeholder="bairro">
-              </div>
-              
-              <div class="form-group">
-                <label>telefone</label>
-                <input required type="text" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['telefone'] : '' ?>" 
-                name="telefone" class="form-control telefone" id="telefone" placeholder="telefone">
-              </div>
-              
-              <div class="form-group">
-                <label>celular</label>
-                <input type="text" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['celular'] : '' ?>" 
-                name="celular" class="form-control celular" id="celular" placeholder="celular">
-              </div>
-
-              <div class="form-group">
-                <label>Descrição</label>
-                <input type="text" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['descricao'] : '' ?>" 
-                name="descricao" class="form-control" id="descricao" placeholder="descricao">
-              </div>
-
-              <div class="form-group">
-                <label>Imagem</label>
-                <input type="text" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['imagem'] : '' ?>" 
-                name="imagem" class="form-control" id="imagem" placeholder="imagem">
-              </div>
-
-              <div class="form-group">
-                <label>Cidade</label>
-
-
-                <select name="cidade" class="form-control">
+              <label> Escola</label>
+              <select name="escola" class="form-control">
                   <option value=""> Selecione </option>
                   <?php
-                    $sql = 'SELECT * FROM cidade';
+                    $sql = 'SELECT * FROM escola';
                     $dados = mysqli_query($conexao, $sql);
 
                     while($coluna = mysqli_fetch_assoc($dados)){
                       echo "<option value='".$coluna['id']."' >".$coluna['nome']."</option>";
                      }
                   ?>
-                </select>
+              </select>
+
+              <div class="form-group">
+                <label> Série </label>
+                <input value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['serie'] : '' ?>" type="text" name="serie" class="form-control" id="serie" placeholder="serie">
+              </div>
+
+              <div class="form-group">
+                <label> Nutricionista </label>
                 
+                <input title="campo de nutricionista" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['nutricionista'] : '' ?>" 
+                type="text" name="nutricionista" class="form-control" id="nutricionista" placeholder="nutricionista">
+              </div>
+
+              <div class="form-group">
+                <label>pdf</label>
+                <input type="text" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['pdf'] : '' ?>" 
+                                    name="pdf" class="form-control pdf" id="pdf" placeholder="pdf">
               </div>
 
               <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
 
+
           </div>
+
+        
 
 
           <div class="col-md card">
@@ -131,9 +114,8 @@ if(!empty($_GET['idAlt'])){
               <thead>
                 <tr>
                   <th scope="col" class="col-1">cód</th>
-                  <th scope="col"> Nome </th>
-                  <th scope="col"> Telefone </th>
-                  <th scope="col"> Cidade </th>
+                  <th scope="col"> serie </th>
+                  <th scope="col"> pdf </th>
                   <th scope="col" class="col-2"> Opções </th>
                 </tr>
               </thead>
@@ -141,35 +123,20 @@ if(!empty($_GET['idAlt'])){
 
                 <?php
                   //sql para selecionar todos dadosAlteracao
-                  $sql = "SELECT * FROM escola";
+                  $sql = "SELECT * FROM cardapio";
                   //executa o sql e armazena
                   $resultado = mysqli_query($conexao, $sql);
-
                   while($coluna = mysqli_fetch_assoc($resultado)){
                 ?>
-
                 <tr>
-                    <!--ola mundo-->
                   <td> <?php echo $coluna['id'] ?> </td>
-                  <td> <?php echo $coluna['nome'] ?> </td>
-                  <td> <?php echo $coluna['telefone'] ?> </td>
-                  <td><?php 
-                    $sql2 = "SELECT * FROM cidade WHERE id='".$coluna['cidade']."' ";
-                    $dados = mysqli_query($conexao, $sql2);
-                    $buscaCidade = mysqli_fetch_assoc($dados);
-                    echo $buscaCidade['nome'] ?> </td>
+                  <td> <?php echo $coluna['serie'] ?> </td>
+                  <td> <?php echo $coluna['pdf'] ?> </td>
                   <td>
-                    <?php
-                    $texto = $coluna['celular'];
-                    $whats = str_replace(array('(', ')', '-'), '', $texto);
-                    ?>
-
-                    <a href="https://wa.me/+55<?php echo $whats?>" target="_blank"> 
-                      <i class="fa-brands fa-whatsapp editar"></i> </a>
-
-                    <a href="escola.php?idAlt=<?= $coluna['id'] ?>" title="Editar"> <i class="fa-solid fa-pen-to-square editar"></i> </a>
-                    <a href="<?php echo './escola/excluir.php?id='.$coluna['id']; ?>" title="Excluir"> <i class="fa-solid fa-trash excluir"></i></a>
+                    <a href="cardapio.php?idAlt=<?= $coluna['id'] ?>" title="Editar"> <i class="fa-solid fa-pen-to-square editar"></i> </a>
+                    <a href="<?php echo './cardapio/excluir.php?id='.$coluna['id']; ?>" title="Excluir"> <i class="fa-solid fa-trash excluir"></i></a>
                   </td>
+                  
                 </tr>
                 
                 <?php } ?>
@@ -182,7 +149,7 @@ if(!empty($_GET['idAlt'])){
         </div>
       </div>
 
-   
+    </div>
 
   </div>
 
@@ -204,6 +171,7 @@ if(!empty($_GET['idAlt'])){
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script src="script.js"></script>
+
 
 </body>
 

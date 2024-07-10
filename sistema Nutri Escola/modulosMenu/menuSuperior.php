@@ -30,7 +30,7 @@
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit"> <i class="fa-solid fa-search"></i> </button>
+        <button title="Botão para buscar" class="btn btn-outline-light my-2 my-sm-0" type="submit"> <i class="fa-solid fa-search"></i> </button>
         
       </form>
     </div>
