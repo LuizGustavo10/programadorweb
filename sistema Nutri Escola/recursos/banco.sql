@@ -26,7 +26,7 @@ CREATE TABLE usuario(
     nome VARCHAR(45),
     cpf VARCHAR(15),
     senha VARCHAR(45)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*Inserindo na tabela usuario*/
 INSERT INTO usuario(nome, cpf, senha) VALUES
@@ -39,7 +39,8 @@ CREATE TABLE cidade(
 	nome VARCHAR(45),
     estado VARCHAR(20),
     cep VARCHAR(10)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 /*inserindo na tabela cidade*/
 INSERT INTO cidade(nome, estado, cep) VALUES 
 ('Nova Londrina','Paraná','87.970-000'), 
@@ -55,19 +56,19 @@ CREATE TABLE escola(
     descricao VARCHAR(255),
     imagem VARCHAR(255),
     cidade INT
-);
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 INSERT INTO escola(nome, endereco, bairro, telefone, celular, descricao, imagem, cidade) VALUES
 ('Colégio Estadual Princesa Isabel','Rua Recife, 1171','Centro','(44)3448-1767','n','teste','imagem', 2),
 ('Colégio Ary João Dresch','Praça Matriz, 143','Centro','(44)3432-1178','n','teste','imagem', 1);
 
 CREATE TABLE cardapio(
-	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT PRIMARY KEY NOT NULL,
     serie VARCHAR(45),
     nutricionista VARCHAR(45),
    	pdf VARCHAR(255),
     escola int
-);
+)ENGINE=MyISAM DEFAULT CHARSET=latin1;;
 
 INSERT INTO cardapio(serie, nutricionista, pdf, escola) VALUES
 ('6º ao 9º ano fundamental','Ana Laura','endereço do pdf', 1),

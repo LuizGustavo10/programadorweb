@@ -11,10 +11,11 @@ $conexao = mysqli_connect($endereco, $usuario, $senha, $nome);
 
 <?php
 $endereco = "localhost"; //localhost
-$nome = "projetoescola";   //projetoescola
+$nome = "projetoescola2";   //projetoescola
 $usuario = "root";         //root
 $senha = "";               //vazio
-
 $conexao = mysqli_connect($endereco, $usuario, $senha, $nome);
+$conexao->set_charset("utf8");
+
 
 ?>

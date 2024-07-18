@@ -107,7 +107,21 @@ if(!empty($_GET['idAlt'])){
 
 
                 <select name="cidade" class="form-control">
-                  <option value=""> Selecione </option>
+                <option value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['cidade'] : '' ?>">
+                    <?php
+                        //se houver dados de alteração busca o nome da escola
+                        if(isset($dadosAlteracao)){
+                          $sql = "SELECT * FROM cidade WHERE id=".$dadosAlteracao['cidade'];
+                          $dados = mysqli_query($conexao, $sql);
+                          $colunas = mysqli_fetch_assoc($dados);
+                          echo $colunas['nome'];
+                        // se não tiver dados de alteração, só aparece selecione
+                        }else{
+                          echo 'Selecione...';
+                        }
+                    ?> 
+                  </option>
+
                   <?php
                     $sql = 'SELECT * FROM cidade';
                     $dados = mysqli_query($conexao, $sql);

@@ -71,7 +71,21 @@ if(!empty($_GET['idAlt'])){
 
               <label> Escola</label>
               <select name="escola" class="form-control">
-                  <option value=""> Selecione </option>
+                <option value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['escola'] : '' ?>">
+                    <?php
+                        //se houver dados de alteração busca o nome da escola
+                        if(isset($dadosAlteracao)){
+                          $sql = "SELECT * FROM escola WHERE id=".$dadosAlteracao['escola'];
+                          $dados = mysqli_query($conexao, $sql);
+                          $colunas = mysqli_fetch_assoc($dados);
+                          echo $colunas['nome'];
+                        // se não tiver dados de alteração, só aparece selecione
+                        }else{
+                          echo 'Selecione...';
+                        }
+                    ?> 
+                  </option>
+
                   <?php
                     $sql = 'SELECT * FROM escola';
                     $dados = mysqli_query($conexao, $sql);
@@ -115,7 +129,8 @@ if(!empty($_GET['idAlt'])){
                 <tr>
                   <th scope="col" class="col-1">cód</th>
                   <th scope="col"> serie </th>
-                  <th scope="col"> pdf </th>
+                  <th scope="col"> Nutricionista </th>
+                  <th scope="col"> Escola </th>
                   <th scope="col" class="col-2"> Opções </th>
                 </tr>
               </thead>
@@ -131,7 +146,15 @@ if(!empty($_GET['idAlt'])){
                 <tr>
                   <td> <?php echo $coluna['id'] ?> </td>
                   <td> <?php echo $coluna['serie'] ?> </td>
-                  <td> <?php echo $coluna['pdf'] ?> </td>
+                  <td> <?php echo $coluna['nutricionista'] ?> </td>
+
+                  <td><?php 
+                    $sql2 = "SELECT * FROM escola WHERE id=".$coluna['escola'];
+                    $dados = mysqli_query($conexao, $sql2);
+                    $busca = mysqli_fetch_assoc($dados);
+                    echo $busca['nome'] ?> 
+                  </td>
+                  
                   <td>
                     <a href="cardapio.php?idAlt=<?= $coluna['id'] ?>" title="Editar"> <i class="fa-solid fa-pen-to-square editar"></i> </a>
                     <a href="<?php echo './cardapio/excluir.php?id='.$coluna['id']; ?>" title="Excluir"> <i class="fa-solid fa-trash excluir"></i></a>

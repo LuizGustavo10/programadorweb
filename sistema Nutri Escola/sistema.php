@@ -10,6 +10,8 @@ $destino = './usuario/inserir.php';
 if(!empty($_GET['idAlt'])){
   $id= $_GET['idAlt'];
   $sql = "SELECT * FROM usuario WHERE id='$id' ";
+
+
   $dados = mysqli_query($conexao, $sql);
   $dadosAlteracao = mysqli_fetch_assoc($dados);
 
