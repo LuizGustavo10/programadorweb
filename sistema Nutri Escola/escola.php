@@ -52,7 +52,7 @@ if(!empty($_GET['idAlt'])){
         <div class="row">
           <div class="col-md-4 card">
 
-            <form action="<?=$destino?>" method="POST">
+            <form action="<?=$destino?>" method="POST" enctype="multipart/form-data">
            
               <h3>Cadastro de escola</h3>
               <hr>
@@ -98,7 +98,7 @@ if(!empty($_GET['idAlt'])){
 
               <div class="form-group">
                 <label>Imagem</label>
-                <input type="text" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['imagem'] : '' ?>" 
+                <input type="file" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['imagem'] : '' ?>" 
                 name="imagem" class="form-control" id="imagem" placeholder="imagem">
               </div>
 

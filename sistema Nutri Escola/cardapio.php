@@ -110,7 +110,7 @@ if(!empty($_GET['idAlt'])){
 
               <div class="form-group">
                 <label>pdf</label>
-                <input type="text" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['pdf'] : '' ?>" 
+                <input type="file" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['pdf'] : '' ?>" 
                                     name="pdf" class="form-control pdf" id="pdf" placeholder="pdf">
               </div>
 
