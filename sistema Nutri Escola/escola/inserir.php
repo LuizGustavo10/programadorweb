@@ -10,6 +10,7 @@ $celular = $_REQUEST['celular'];
 $descricao = $_REQUEST['descricao'];
 $imagem = $_REQUEST['imagem'];
 $cidade = $_REQUEST['cidade'];
+$mapa = $_REQUEST['mapa'];
 
 
 // Pasta de destino para uploads (usando caminho relativo)
@@ -58,8 +59,8 @@ $relative_target_file = $imagemBanco . basename($_FILES["imagem"]["name"]);
 
 //echo 'dados chegando'.$nome.$cpf.$senha;
 
-$sql = "INSERT INTO escola(nome, endereco, bairro, telefone, celular, descricao, imagem, cidade) 
-VALUES ('$nome','$endereco', '$bairro','$telefone','$celular', '$descricao', '$relative_target_file', '$cidade')";
+$sql = "INSERT INTO escola(nome, endereco, bairro, telefone, celular, descricao, imagem, cidade, mapa) 
+VALUES ('$nome','$endereco', '$bairro','$telefone','$celular', '$descricao', '$relative_target_file', '$cidade','$mapa')";
 
 //executar sql
 $resultado = mysqli_query($conexao, $sql);

@@ -59,7 +59,7 @@ if(!empty($_GET['idAlt'])){
         <div class="row">
           <div class="col-md-4 card">
 
-            <form action="<?=$destino?>" method="POST">
+            <form action="<?=$destino?>" method="POST" enctype="multipart/form-data">
            
 
               <h3>Cadastro de cardapio</h3>

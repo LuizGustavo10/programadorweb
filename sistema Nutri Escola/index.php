@@ -10,18 +10,16 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#"> <i class="fa-solid fa-building-wheat"></i> NutriEscola</a>
+        <a class="navbar-brand" href="index.php"> <i class="fa-solid fa-building-wheat"></i> NutriEscola</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
           <span class="navbar-toggler-icon"></span>
         </button>
       
         <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
           <ul class="navbar-nav mr-auto">
+
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(página atual)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Contato </a>
+                <a class="nav-link" href="contato.html">Contato </a>
             </li>
 
 
@@ -68,45 +66,49 @@
         <p> Um site para mostrar ao alunos e pais a alimentação escolar.</p>
 
         <div class="row">
-            <div class="col-md">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="recursos/foto 5.jfif" alt="Imagem de capa do card">
+       
+        <?php 
+          //incluir banco
+          include 'conexao.php';
+
+          //seleciona todas as escolas
+          $sql = "SELECT * FROM escola";
+          //executa o código sql de banco
+          $resultado = mysqli_query($conexao, $sql);
+
+          //enquanto - looping - carrega os dados de cada escola em $coluna
+          while($coluna = $resultado->fetch_assoc()){
+
+        ?>
+
+            <div class="col-md-4 mb-4">
+
+                <div class="card" style="width: 22rem;">
+                    <img height="200px" class="card-img-top" src="<?php echo $coluna['imagem'] ?>" alt="Imagem de capa do card">
                     <div class="card-body">
-                      <h5 class="card-title">Colégio Ary João Dresch</h5>
-                      <p class="card-text">Nova Londrina</p>
-                      <a href="#" class="btn btn-primary">Visitar</a>
+                      <h5 class="card-title"> <?php echo $coluna['nome'] ?> </h5>
+                      <p class="card-text">
+
+                        <?php 
+                          $sql2 = "SELECT * FROM cidade WHERE id='".$coluna['cidade']."' ";
+                          $dados = mysqli_query($conexao, $sql2);
+                          $buscaCidade = mysqli_fetch_assoc($dados);
+                          echo $buscaCidade['nome'] ?>
+                       </p>
+                       
+                      <a href="<?php echo './indexEscolas.php?codigo='.$coluna['id'] ?>" class="btn btn-primary">Visitar</a>
                     </div>
                   </div>
             </div>
 
-            <div class="col-md">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="recursos/foto 5.jfif" alt="Imagem de capa do card">
-                    <div class="card-body">
-                      <h5 class="card-title">Colégio Ary João Dresch</h5>
-                      <p class="card-text">Nova Londrina</p>
-                      <a href="#" class="btn btn-primary">Visitar</a>
-                    </div>
-                  </div>
-            </div>
+            <?php } ?>
 
-            <div class="col-md">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="recursos/foto 5.jfif" alt="Imagem de capa do card">
-                    <div class="card-body">
-                      <h5 class="card-title">Colégio Ary João Dresch</h5>
-                      <p class="card-text">Nova Londrina</p>
-                      <a href="#" class="btn btn-primary">Visitar</a>
-                    </div>
-                  </div>
-            </div>
-
-            
+  
         </div>
 
     </div>
 
-
+  
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

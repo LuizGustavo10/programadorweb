@@ -91,6 +91,12 @@ if(!empty($_GET['idAlt'])){
               </div>
 
               <div class="form-group">
+                <label>mapa</label>
+                <input type="text" value='<?php echo isset($dadosAlteracao) ? $dadosAlteracao['mapa'] : '' ?>' 
+                name="mapa" class="form-control mapa" id="mapa" placeholder="mapa">
+              </div>
+
+              <div class="form-group">
                 <label>Descrição</label>
                 <input type="text" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['descricao'] : '' ?>" 
                 name="descricao" class="form-control" id="descricao" placeholder="descricao">
@@ -98,7 +104,7 @@ if(!empty($_GET['idAlt'])){
 
               <div class="form-group">
                 <label>Imagem</label>
-                <input type="file" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['imagem'] : '' ?>" 
+                <input type="file" required  class="form-control" value="<?php echo isset($dadosAlteracao) ? $dadosAlteracao['imagem'] : '' ?>" 
                 name="imagem" class="form-control" id="imagem" placeholder="imagem">
               </div>
 
@@ -144,6 +150,7 @@ if(!empty($_GET['idAlt'])){
             <table class="table " id="tabela">
               <thead>
                 <tr>
+                  <th scope="col" class="col-1">Imagem</th>
                   <th scope="col" class="col-1">cód</th>
                   <th scope="col"> Nome </th>
                   <th scope="col"> Telefone </th>
@@ -164,9 +171,12 @@ if(!empty($_GET['idAlt'])){
 
                 <tr>
                     <!--ola mundo-->
+          
+                  <td> <img src="<?php echo $coluna['imagem'] ?>" width="50">  </td>
                   <td> <?php echo $coluna['id'] ?> </td>
                   <td> <?php echo $coluna['nome'] ?> </td>
                   <td> <?php echo $coluna['telefone'] ?> </td>
+
                   <td><?php 
                     $sql2 = "SELECT * FROM cidade WHERE id='".$coluna['cidade']."' ";
                     $dados = mysqli_query($conexao, $sql2);
@@ -180,7 +190,6 @@ if(!empty($_GET['idAlt'])){
 
                     <a href="https://wa.me/+55<?php echo $whats?>" target="_blank"> 
                       <i class="fa-brands fa-whatsapp editar"></i> </a>
-
                     <a href="escola.php?idAlt=<?= $coluna['id'] ?>" title="Editar"> <i class="fa-solid fa-pen-to-square editar"></i> </a>
                     <a href="<?php echo './escola/excluir.php?id='.$coluna['id']; ?>" title="Excluir"> <i class="fa-solid fa-trash excluir"></i></a>
                   </td>
